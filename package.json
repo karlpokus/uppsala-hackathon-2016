@@ -1,0 +1,19 @@
+{
+  "name": "uppsala-hackathon-2016",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karlpokus/uppsala-hackathon-2016.git"
+  },
+  "author": "Karl Pokus <karl.pokus@gmail.com> (https://github.com/karlpokus)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/karlpokus/uppsala-hackathon-2016/issues"
+  },
+  "homepage": "https://github.com/karlpokus/uppsala-hackathon-2016#readme"
+}
