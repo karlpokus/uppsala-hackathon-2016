@@ -37,6 +37,11 @@
         if (i < imgs.length) {
           insertImage();
         }
+        // send payload
+        if (i === 5) {
+          $.post('/');
+        }
+
       });
     }
     insertImage();
