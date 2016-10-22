@@ -5,7 +5,7 @@ googleAuth = require('google-auth-library')
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/calendar-nodejs-quickstart.json
 SCOPES = [ 'https://www.googleapis.com/auth/calendar.readonly' ]
-TOKEN_DIR = (process.env.HOME or process.env.HOMEPATH or process.env.USERPROFILE) + '/.credentials/'
+TOKEN_DIR = '.credentials/'
 TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json'
 # Load client secrets from a local file.
 
