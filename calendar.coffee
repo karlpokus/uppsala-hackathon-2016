@@ -127,10 +127,10 @@ run = (callback) ->
 event =
   'summary': 'Business dinner'
   'start':
-    'dateTime': '2016-10-31T18:00:00+01:00'
+    'dateTime': '2016-10-24T18:00:00+01:00'
     'timeZone': 'Europe/Stockholm'
   'end':
-    'dateTime': '2016-10-31T20:00:00+01:00'
+    'dateTime': '2016-10-24T20:00:00+01:00'
     'timeZone': 'Europe/Stockholm'
 
 exports.create = () ->
