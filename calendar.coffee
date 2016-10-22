@@ -4,7 +4,7 @@ google = require('googleapis')
 googleAuth = require('google-auth-library')
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/calendar-nodejs-quickstart.json
-SCOPES = [ 'https://www.googleapis.com/auth/calendar.readonly' ]
+SCOPES = [ 'https://www.googleapis.com/auth/calendar' ]
 TOKEN_DIR = '.credentials/'
 TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json'
 # Load client secrets from a local file.
@@ -88,8 +88,10 @@ storeToken = (token) ->
 alice_calendar_id = '1ig43db9hq5sr6mta5kco0ij3s@group.calendar.google.com'
 bob_calendar_id = 'c625hc036oqls670bp8l62qa7c@group.calendar.google.com'
 
+calendar = google.calendar('v3')
+client_secret_content = null
+
 listEvents = (auth) ->
-  calendar = google.calendar('v3')
   calendar.events.list {
     auth: auth
     calendarId: bob_calendar_id
@@ -110,16 +112,44 @@ listEvents = (auth) ->
       while i < events.length
         event = events[i]
         start = event.start.dateTime or event.start.date
-        console.log '%s - %s', start, event.summary
+        p event.start.timeZone
+        end = event.end.dateTime or event.end.date
+        console.log '%s -> %s - %s', start, end, event.summary
         i++
     return
   return
 
-fs.readFile 'client_secret.json', (err, content) ->
-  if err
-    console.log 'Error loading client secret file: ' + err
-    return
-  # Authorize a client with the loaded credentials, then call the
-  # Google Calendar API.
-  authorize JSON.parse(content), listEvents
-  return
+client_secret_content = fs.readFileSync('client_secret.json').toString()
+
+run = (callback) ->
+  authorize JSON.parse(client_secret_content), callback
+
+event =
+  'summary': 'Business dinner'
+  'start':
+    'dateTime': '2016-10-31T18:00:00-07:00'
+    'timeZone': 'Europe/Stockholm'
+  'end':
+    'dateTime': '2016-10-31T20:00:00-07:00'
+    'timeZone': 'Europe/Stockholm'
+
+exports.create = () ->
+  run (auth) ->
+    calendar.events.insert {
+      auth: auth
+      calendarId: alice_calendar_id
+      resource: event
+    }, (err, event) ->
+      if err
+        console.log 'There was an error contacting the Calendar service: ' + err
+        return
+      console.log 'Event created: %s', event.htmlLink
+    calendar.events.insert {
+      auth: auth
+      calendarId: bob_calendar_id
+      resource: event
+    }, (err, event) ->
+      if err
+        console.log 'There was an error contacting the Calendar service: ' + err
+        return
+      console.log 'Event created: %s', event.htmlLink
