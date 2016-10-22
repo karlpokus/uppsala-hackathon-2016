@@ -1,13 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>MIRL</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MIRL</title>
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
 </head>
+<style>
+  img {
+    width:100%;
+  }
+</style>
 <body>
-  <h1>MIRL</h1>
-  <p>
-    yey!
-  </p>
+  <img/>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script>
+    var imgs = [
+          '01_image.png',
+          '02_image.png',
+          '03_image.png',
+          '04_image.png',
+        	'05_image.png',
+          '06_image.png',
+          '07_image.png',
+          '08_image.png',
+          '09_image.png',
+          '10_image.png',
+          '11_image.png'
+        ],
+        i = 0;
+    function insertImage() {
+      var path = '/img/' + imgs[i];
+      $('img').attr('src', path);
+      i++;
+    }
+    function addEvent() {
+      $('img').on('click', function(){
+        if (i < imgs.length) {
+          insertImage();
+        }
+      });
+    }
+    insertImage();
+    addEvent();
+  </script>
 </body>
 </html>
